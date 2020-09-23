@@ -30,7 +30,7 @@ function getName(character) {
  */
 function getFilmCount(character) {
   // TODO: Add your code inside the functions (others below).
-
+  return character.films.length
 }
 
 /**
@@ -42,6 +42,11 @@ function getFilmCount(character) {
  * If length is 0. Return 'none'
 */
 function getSecondStarshipName(character) {
+  if(character.starships.length > 0){
+    return character.starships[1].name
+  } else {
+    return "none"
+  }
   // TODO: Add your code here.
 }
 
@@ -56,6 +61,7 @@ function getSecondStarshipName(character) {
  */
 function getSummary(character) {
   // TODO: Add your code here.
+  return `${character.name}, ${Number(character.height)}cm, ${Number(character.mass)}kg. Featured in ${character.films.length} films.` 
 }
 
 /**
@@ -66,9 +72,21 @@ function getSummary(character) {
  * Sum the total cost in credits for all vehicles defined on the input character.
  * Sample data expected output: 8000
 */
+
+// console.log(Number.isInteger(null))
+
 function getVehiclesCostInCreditsSumTotal(character) {
   // TODO: Add your code here.
+  // console.log(character.vehicles[0].cost_in_credits)
+  return character.vehicles.reduce((acc, item)  => {
+    if(item.cost_in_credits == null){
+      return acc + 0
+    } else {
+      return acc + item.cost_in_credits
+    }
+  }, 0);
 }
+
 
 /**
  * ### Challenge `getStarshipPassengerAndCrewSumTotal`
@@ -82,7 +100,13 @@ function getVehiclesCostInCreditsSumTotal(character) {
 */
 function getStarshipPassengerAndCrewSumTotal(character) {
   // TODO: Add your code here.
+  let starshipAndCrewTotal = character.starships.reduce((acc, item) =>{
+    return acc + item.crew + item.passengers
+  }, 0)
+return starshipAndCrewTotal
 }
+
+
 
 /**
  * ### Challenge `getNthFilm`
@@ -99,7 +123,12 @@ function getStarshipPassengerAndCrewSumTotal(character) {
 */
 function getNthFilm(character, filmNumber) {
   // TODO: Add your code here.
-}
+  if(filmNumber > 3){
+    return "Oh Brother Where Art Thou"
+  } else{
+    return character.films[filmNumber-1]
+  }
+}   
 
 /**
  * ### Challenge `getCargoCapacityTotal`
